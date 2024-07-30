@@ -1,13 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid Layout</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="heading"><h1>Expense Tracker</h1></div>
+        <div class="grid-container">
+            <div class="grid-item grid1">
+                <span class="your-income"><b>Add income</b></span>
+                <input type="text" placeholder="1000$" class="input-field input-income">
+                <button class="btn add-income">Add income</button>
+            </div>
+            <div class="grid-item large">
+                <span class="your-income"><b>Add Transaction</b></span>
+                <div class="second"><input class="input-transaction-reason" type="text" placeholder="Transaction purpose : Food, drinks, gas, etc..." class="input-field"><input class="input-transaction-amounth" type="text" placeholder="1000$" class="input-field"></div>
+                <button class="btn add-transaction">Add Transaction</button>
+            </div>
+            <div class="grid-item grid4">
+                <div class="expenses-info"><p>Balance: </p><p class="balance-sum">$0</p></div>
+            </div>
+            <div class="grid-item empty"></div>
+            <div class="grid-item grid4">
+                <div class="expenses-info"><p>Expense: </p><p class="exp-sum">$0</p></div>
+            </div>
+        </div>
+        <div class="table-container">
+
+            <div class="table-income styletable">
+
+            </div>
+
+            <div class="table-transactions styletable">
+
+            </div>
+
+        </div>
+
+        <div class="btn-sort">
+            <button class="sort">Sort transaction</button>
+            <button class="sort-AZ">Sort transaction A-Z</button>
+        </div>
+ 
+
+    </div>
+    <script src="main.js"></script>
+</body>
 </html>
+
