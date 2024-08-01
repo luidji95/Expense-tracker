@@ -39,3 +39,68 @@
     align-items: center;
     
 }
+.your-income{
+    font-size: 24px;
+}
+.input-field{
+    border-radius: 10px;
+    padding: 5px 10px;
+    border-style: none;
+    background-color: white;
+    width: 250px;
+}
+.btn{
+    padding:5px 10px;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 20px;
+    background-color: rgb(139, 135, 135);
+    color: white
+}
+.large{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.second{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;  
+}
+.expenses-info{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.grid4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.table-container{
+    width: 1200px;
+    margin-top: 20px;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 20px;
+    padding: 20px;
+}
+.styletable{
+    height: 200px;
+    background-color: whitesmoke;
+    width: 500px;
+}
+.table-income{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+}
