@@ -71,3 +71,89 @@ class Manager {
     addTransactionToArray(transaction) {
         this.TransactionsArray.push(transaction);
     }
+
+    //Povecavamo balans za odredjeni iznos 
+    increaseBalance(value) {
+        return this.totalBalance += value;
+    }
+
+    // Smanjujemo balans 
+    decreaseBalance(value) {
+        return this.totalBalance -= value;
+    }
+
+    getTotalBalance() {
+        return this.totalBalance;
+    }
+
+    // Renderujemo income tj sve income koje se nalaze u nizu 
+    renderAllIncomes() {
+        tableIncome.textContent = "";
+        this.IncomeArray.forEach(income => {
+            const html = `<div id="${income.id}" class="newIncome">
+                <p>${income.incomeValue} $</p>
+                <p>${income.time}</p>
+                <p>${income.date}</p>
+                <p class="delete-income">X</p>
+            </div>`;
+            tableIncome.insertAdjacentHTML("afterbegin", html);
+        });
+    }
+
+    // Renderujemo sve transakcije iz niza transakcija
+    renderAllTransactions() {
+        tableExpenses.textContent = "";
+        this.TransactionsArray.forEach(transaction => {
+            const html = `<div id="${transaction.id}" class="newTransaction">
+                <p>${transaction.transactionName}</p>
+                <p>${transaction.transactionValue} $</p>
+                <p>${transaction.time}</p>
+                <p>${transaction.date}</p>
+                <p class="delete-transaction">X</p>
+            </div>`;
+            tableExpenses.insertAdjacentHTML("afterbegin", html);
+        });
+    }
+
+    increaseExpense(value) {
+        return this.totalExpenses += value;
+    }
+
+    decreaseExpense(value) {
+        return this.totalExpenses -= value;
+    }
+
+    canAffordTransaction(value) {
+        return this.totalBalance >= value;
+    }
+
+    deleteIncome(id) {
+        const incomeIndex = this.IncomeArray.findIndex(income => income.id === id);
+        if (incomeIndex !== -1) {
+            const income = this.IncomeArray[incomeIndex];
+            this.decreaseBalance(income.incomeValue);
+            this.IncomeArray.splice(incomeIndex, 1);
+            this.renderAllIncomes();
+            balance.textContent = this.getTotalBalance(); // Ažuriramo prikaz balansa
+        }
+    }
+ 
+    deleteTransaction(id) {
+        const transactionIndex = this.TransactionsArray.findIndex(transaction => transaction.id === id);
+        if (transactionIndex !== -1) {
+            const transaction = this.TransactionsArray[transactionIndex];
+            this.increaseBalance(transaction.transactionValue);
+            this.TransactionsArray.splice(transactionIndex, 1);
+            this.renderAllTransactions();
+            balance.textContent = this.getTotalBalance(); // Ažuriramo prikaz balansa
+            expenses.textContent = this.totalExpenses -= transaction.transactionValue; // Ažuriramo prikaz troškova
+        }
+    }
+
+    sortTransaction() {
+        this.TransactionsArray.sort((a, b) => a.transactionName.localeCompare(b.transactionName));
+        this.renderAllTransactions(); // Renderovanje nakon sortiranja
+    }
+}
+
+const manager = new Manager();
