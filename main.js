@@ -157,3 +157,71 @@ class Manager {
 }
 
 const manager = new Manager();
+
+// Funkcija za validaciju inputa
+function validateInputs() {
+    if (transactionReason.value.trim() !== "" && transactionAmount.value.trim() !== "") {
+        addTransaction.disabled = false;
+        addTransaction.classList.remove('disabled-button');
+        addTransaction.classList.add('enabled-button');
+    } else {
+        addTransaction.disabled = true;
+        addTransaction.classList.remove('enabled-button');
+        addTransaction.classList.add('disabled-button');
+    }
+}
+
+// Inicijalna validacija
+validateInputs();
+
+addIncome.addEventListener('click', function() {
+    const value = parseInt(incomeInput.value);
+    if (!isNaN(value)) {
+        manager.increaseBalance(value);
+        balance.textContent = manager.getTotalBalance();
+        const newIncome = new Income(value);
+        manager.addIncomeToArray(newIncome);
+        manager.renderAllIncomes();
+    } else {
+        console.log('Uneta vrednost nije broj');
+    }
+});
+
+addTransaction.addEventListener('click', function() {
+    const reason = transactionReason.value;
+    const sum = parseInt(transactionAmount.value);
+    if (!isNaN(sum) && manager.canAffordTransaction(sum)) {
+        manager.decreaseBalance(sum);
+        balance.textContent = manager.getTotalBalance();
+        expenses.textContent = manager.increaseExpense(sum);
+        const newTransaction = new Transaction(reason, sum);
+        manager.addTransactionToArray(newTransaction);
+        manager.renderAllTransactions();
+    } else {
+        console.log('Nemate dovoljno sredstava ili uneta vrednost nije broj');
+    }
+});
+
+tableIncome.addEventListener('click', function(ev) {
+    if (ev.target.classList.contains('delete-income')) {
+        const income = ev.target.closest('div');
+        manager.deleteIncome(income.id);
+    }
+});
+
+tableExpenses.addEventListener('click', function(ev) {
+    if (ev.target.classList.contains('delete-transaction')) {
+        const transaction = ev.target.closest('div');
+        manager.deleteTransaction(transaction.id);
+    }
+});
+
+const sortButton = document.querySelector('.sort');
+
+sortButton.addEventListener('click', function() {
+    manager.sortTransaction();
+});
+
+// Dodavanje događaja za validaciju inputa
+transactionReason.addEventListener('input', validateInputs);
+transactionAmount.addEventListener('input', validateInputs);
